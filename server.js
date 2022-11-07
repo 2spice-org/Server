@@ -36,7 +36,7 @@ app.post('/like', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.json('hellow r')
+    res.send('hellow r')
 })
 
 app.listen(8000, () => {
