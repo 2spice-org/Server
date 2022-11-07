@@ -35,6 +35,9 @@ app.post('/like', (req, res) => {
     console.log('recieved')
 })
 
+app.get('/', (req, res) => {
+    res.json('hellow r')
+})
 
 app.listen(8000, () => {
     console.log('hello world')
