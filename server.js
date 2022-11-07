@@ -1,4 +1,3 @@
-const Port = process.env.PORT || 8000
 const express = require('express');
 const axios = require('axios')
 const cors = require('cors')
@@ -11,6 +10,8 @@ require('dotenv').config()
 const appId = process.env.APP_ID
 const serverUrl = process.env.SERVER_URL;
 const masterKey = process.env.MASTER_KEY;
+
+const Port = process.env.PORT || 8000
 
 const app = express()
 
