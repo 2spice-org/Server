@@ -35,7 +35,7 @@ app.post('/like', (req, res) => {
     console.log('recieved')
 })
 
-app.get('/', (req, res) => {
+app.get('/get', (req, res) => {
     res.send('hellow r')
 })
 
