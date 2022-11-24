@@ -47,7 +47,7 @@ const likePostMain = async (mpId, email) => {
 
 app.post('/like', (req, res) => {
     const host = req.get('origin');
-    const data = res
+    const data = req.params
     console.log(host)
     if (host == whiteListedOrignsLive || host == whiteListedOrignsTest) {
         likePostMain(data.mpId, data.email)
