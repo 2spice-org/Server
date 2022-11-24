@@ -12,7 +12,7 @@ const ServerUrl = process.env.SERVER_URL;
 const MasterKey = process.env.MASTER_KEY;
 
 const whiteListedOrignsLive = 'https://blog.2spice.link/'
-const whiteListedOrignsTest = 'http://localhost:3000/'
+const whiteListedOrignsTest = 'http://localhost:3001/'
 
 // await Moralis.start({ serverUrl: 'https://2nlnyiqavans.usemoralis.com:2053/server', appId: '2veCjTTSOVtcYuw3kCohS7SVFjZPBc8j0nQyFa00', masterKey: 'w4pUrmNaq7RxTH39TilElpboKQr7weZGLFxiGixB' })
 
