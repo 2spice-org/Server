@@ -36,7 +36,14 @@ const startMoralis = async () => {
 
 const likePostMain = async (mpId, email) => {
     const GEMS = Moralis.Object.extend('Gems')
+    const User = Moralis.Object.extend('_User')
     const gem = new GEMS()
+    const query = new Moralis.Query(User)
+    query.equalTo('email', email)
+    const user = await query.first({ useMasterKey: true })
+    const balance = user.get('gems')
+    user.set('gems', balance + 0.03)
+    user.save(null, { useMasterKey: true })
     gem.set('email', email)
     gem.set('gems', 0.03)
     gem.set('type', 'post_like')
