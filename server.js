@@ -51,7 +51,7 @@ app.post('/like', (req, res) => {
     if (host == whiteListedOrignsLive || host == whiteListedOrignsTest) {
         likePostMain(data.mpId, data.email)
     } else {
-        console('failed')
+        console.log('failed')
     }
 
     console.log('recieved')
