@@ -47,6 +47,7 @@ const likePostMain = async (mpId, email) => {
 
 app.post('/like', (req, res) => {
     const host = req.get('host');
+    console.log(host)
     if (host == whiteListedOrignsLive || host == whiteListedOrignsTest) {
         likePostMain(data.mpId, data.email)
     } else {
@@ -63,6 +64,7 @@ app.get('/get', (req, res) => {
 
     // startMoralis()
     res.send('result')
+
 })
 
 
