@@ -62,7 +62,7 @@ app.get('/get', (req, res) => {
     const result = query.first({ useMasterKey: true })
 
     // startMoralis()
-    res.send(result)
+    res.send('result')
 })
 
 
