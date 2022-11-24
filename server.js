@@ -7,9 +7,14 @@ require('dotenv').config()
 // const fs = require("fs");
 
 
-const appId = process.env.APP_ID
-const serverUrl = process.env.SERVER_URL;
-const masterKey = process.env.MASTER_KEY;
+const AppId = process.env.APP_ID
+const ServerUrl = process.env.SERVER_URL;
+const MasterKey = process.env.MASTER_KEY;
+
+const whiteListedOrignsLive = 'https://2spice.link/'
+const whiteListedOrignsTest = 'http://localhost:3000/'
+
+// await Moralis.start({ serverUrl: 'https://2nlnyiqavans.usemoralis.com:2053/server', appId: '2veCjTTSOVtcYuw3kCohS7SVFjZPBc8j0nQyFa00', masterKey: 'w4pUrmNaq7RxTH39TilElpboKQr7weZGLFxiGixB' })
 
 const Port = process.env.PORT || 8000
 
@@ -17,9 +22,19 @@ const app = express()
 
 app.use(cors())
 
+const startMoralis = async () => {
+    console.log(ServerUrl)
+    console.log(AppId)
+    console.log(MasterKey)
+    try {
+        await Moralis.start({ serverUrl: ServerUrl, appId: AppId, masterKey: MasterKey })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 const likePostMain = async (mpId, email) => {
-    await Moralis.start({ serverUrl, appId, masterKey })
     const GEMS = Moralis.Object.extend('Gems')
     const gem = new GEMS()
     gem.set('email', email)
@@ -31,16 +46,30 @@ const likePostMain = async (mpId, email) => {
 
 
 app.post('/like', (req, res) => {
-    const data = req.query
-    likePostMain(data.mpId, data.email)
+    const host = req.get('host');
+    if (host == whiteListedOrignsLive || host == whiteListedOrignsTest) {
+        likePostMain(data.mpId, data.email)
+    } else {
+        console('failed')
+    }
+
     console.log('recieved')
 })
 
 app.get('/get', (req, res) => {
-    res.send('hellow r')
+    const GEMS = Moralis.Object.extend('_User')
+    const query = new Moralis.Query(GEMS)
+    const result = query.first({ useMasterKey: true })
+
+    // startMoralis()
+    res.send(result)
 })
 
-app.listen(Port, () => {
-    console.log(Port)
-    console.log('hello world')
+
+Moralis.start({ serverUrl: ServerUrl, appId: AppId, masterKey: MasterKey }).then(() => {
+    app.listen(Port, () => {
+        console.log(Port)
+        console.log('hello world')
+    })
 })
+
