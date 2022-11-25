@@ -42,7 +42,7 @@ const likePostMain = async (mpId, email) => {
     query.equalTo('email', email)
     const user = await query.first({ useMasterKey: true })
     const balance = user.get('gems')
-    user.set('gems', balance + 0.03)
+    user.set('gem_balance', balance + 0.03)
     user.save(null, { useMasterKey: true })
     gem.set('email', email)
     gem.set('gems', 0.03)
