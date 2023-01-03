@@ -12,7 +12,6 @@ const ServerUrl = process.env.SERVER_URL;
 const MasterKey = process.env.MASTER_KEY;
 
 const whiteListedOrignsLive = 'https://blog.2spice.link'
-const whiteListedOrignsTest = 'http://localhost:3001'
 
 // await Moralis.start({ serverUrl: 'https://2nlnyiqavans.usemoralis.com:2053/server', appId: '2veCjTTSOVtcYuw3kCohS7SVFjZPBc8j0nQyFa00', masterKey: 'w4pUrmNaq7RxTH39TilElpboKQr7weZGLFxiGixB' })
 
@@ -57,7 +56,7 @@ app.post('/like', (req, res) => {
     const data = req.query
     console.log(data)
     console.log(host)
-    if (host == whiteListedOrignsLive || host == whiteListedOrignsTest) {
+    if (host == whiteListedOrignsLive) {
         likePostMain(data.mpId, data.email)
     } else {
         console.log('failed')
@@ -75,6 +74,7 @@ app.get('/get', (req, res) => {
     res.send('result')
 
 })
+
 
 
 Moralis.start({ serverUrl: ServerUrl, appId: AppId, masterKey: MasterKey }).then(() => {
