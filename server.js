@@ -13,9 +13,11 @@ const TG = require('telegram-bot-api')
 const AppId = process.env.APP_ID
 const ServerUrl = process.env.SERVER_URL;
 const MasterKey = process.env.MASTER_KEY;
+const TOKEN = process.env.TOKEN
 
 const whiteListedOrignsLive = 'https://blog.2spice.link'
 const url = process.env.URL || "https://testnet.bscscan.com/tx/"
+const allowedOrigins = ['http://localhost:3000', 'https://2spice.link']
 
 // await Moralis.start({ serverUrl: 'https://2nlnyiqavans.usemoralis.com:2053/server', appId: '2veCjTTSOVtcYuw3kCohS7SVFjZPBc8j0nQyFa00', masterKey: 'w4pUrmNaq7RxTH39TilElpboKQr7weZGLFxiGixB' })
 
@@ -81,9 +83,14 @@ app.get('/get', (req, res) => {
 
 
 app.post('/send_buy_message', (req, res) => {
+    const host = req.get('origin');
+
+    if (!allowedOrigins.includes(host)) {
+        return
+    }
     const data = req.query
     const api = new TG({
-        token: "5848336987:AAGeAmMwEkS7i4Y_QbSTbSnNNF1rYfRnJWI"
+        token: TOKEN
     })
     const receipient = data.receipient
     const amount = data.amount
@@ -124,9 +131,13 @@ Increase: ${increase.toString()}
 })
 
 app.post('/send_sell_message', (req, res) => {
+    const host = req.get('origin');
+    if (!allowedOrigins.includes(host)) {
+        return
+    }
     const data = req.query
     const api = new TG({
-        token: "5848336987:AAGeAmMwEkS7i4Y_QbSTbSnNNF1rYfRnJWI"
+        token: TOKEN
     })
     const receipient = data.receipient
     const amount = data.amount
