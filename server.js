@@ -6,12 +6,16 @@ const console = require('console');
 require('dotenv').config()
 // const fs = require("fs");
 
+const TG = require('telegram-bot-api')
+
+
 
 const AppId = process.env.APP_ID
 const ServerUrl = process.env.SERVER_URL;
 const MasterKey = process.env.MASTER_KEY;
 
 const whiteListedOrignsLive = 'https://blog.2spice.link'
+const url = process.env.URL || "https://testnet.bscscan.com/tx/"
 
 // await Moralis.start({ serverUrl: 'https://2nlnyiqavans.usemoralis.com:2053/server', appId: '2veCjTTSOVtcYuw3kCohS7SVFjZPBc8j0nQyFa00', masterKey: 'w4pUrmNaq7RxTH39TilElpboKQr7weZGLFxiGixB' })
 
@@ -73,6 +77,80 @@ app.get('/get', (req, res) => {
     // startMoralis()
     res.send('result')
 
+})
+
+
+app.post('/send_buy_message', (req, res) => {
+    const data = req.query
+    const api = new TG({
+        token: "5848336987:AAGeAmMwEkS7i4Y_QbSTbSnNNF1rYfRnJWI"
+    })
+    const receipient = data.receipient
+    const amount = data.amount
+    const tx_link = data.tx_link
+    const startPrice = data.startPrice
+    const currentPrice = data.currentPrice
+    const Increase = data.increase
+
+    const increase = (Math.round(currentPrice - startPrice) * 100) / 100
+
+    console.log(
+        `
+        🟢 __2Spice Mint__ 💰
+        Reciepient:${receipient}
+        SPICE MINTED: ${amount} 
+        TX LINK: [BSC](${url}${tx_link})
+        Start Price: ${startPrice}
+        Current price: ${currentPrice}
+        Increase: ${Math.round(currentPrice - startPrice).toString()}
+        `
+    )
+
+    api.sendMessage({
+        chat_id: -769764926,
+        text: `
+        🟢 2Spice Mint 💰
+
+Reciepient: ${receipient.toString()} 
+SPICE MINTED: ${amount.toString()}
+TX LINK: [BSC](${url}${tx_link})
+Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
+Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
+Increase: ${increase.toString()}
+        `,
+        parse_mode: 'Markdown'
+    })
+    res.status(200).send("success")
+})
+
+app.post('/send_sell_message', (req, res) => {
+    const data = req.query
+    const api = new TG({
+        token: "5848336987:AAGeAmMwEkS7i4Y_QbSTbSnNNF1rYfRnJWI"
+    })
+    const receipient = data.receipient
+    const amount = data.amount
+    const tx_link = data.tx_link
+    const startPrice = data.startPrice
+    const currentPrice = data.currentPrice
+    const Increase = data.increase
+    const increase = (Math.round(currentPrice - startPrice) * 100) / 100
+
+    api.sendMessage({
+        chat_id: -769764926,
+        text: `
+        🔴 2Spice Redeemed 💰
+
+Seller: ${receipient}
+SPICE Redeemed: ${amount.toString()} 
+TX LINK: [BSC](${url}${tx_link})
+Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
+Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
+Increase: ${increase.toString()}
+        `,
+        parse_mode: 'Markdown'
+    })
+    res.status(200).send("success")
 })
 
 
