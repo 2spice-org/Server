@@ -14,6 +14,7 @@ const AppId = process.env.APP_ID
 const ServerUrl = process.env.SERVER_URL;
 const MasterKey = process.env.MASTER_KEY;
 const TOKEN = process.env.TOKEN;
+const CHAT_ID = process.env.CHAT_ID || -769764926
 
 const whiteListedOrignsLive = 'https://blog.2spice.link'
 const url = process.env.URL || "https://testnet.bscscan.com/tx/"
@@ -118,7 +119,7 @@ app.post('/send_buy_message', (req, res) => {
     )
 
     api.sendMessage({
-        chat_id: -769764926,
+        chat_id: CHAT_ID,
         text: `
         🟢 2Spice Mint 💰
 
@@ -154,7 +155,7 @@ app.post('/send_sell_message', (req, res) => {
     const increase = (Math.round(currentPrice - startPrice) * 100) / 100
 
     api.sendMessage({
-        chat_id: -769764926,
+        chat_id: CHAT_ID,
         text: `
         🔴 2Spice Redeemed 💰
 
