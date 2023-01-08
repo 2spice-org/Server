@@ -104,7 +104,7 @@ app.post('/send_buy_message', (req, res) => {
     const currentPrice = data.currentPrice
     const Increase = data.increase
 
-    const increase = (Math.round(currentPrice - startPrice) * 100) / 100
+    const increase = (Math.round(currentPrice - startPrice) * 10000000) / 1000000
 
     console.log(
         `
@@ -152,7 +152,7 @@ app.post('/send_sell_message', (req, res) => {
     const startPrice = data.startPrice
     const currentPrice = data.currentPrice
     const Increase = data.increase
-    const increase = (Math.round(currentPrice - startPrice) * 100) / 100
+    const increase = (Math.round(currentPrice - startPrice) * 10000000) / 10000000
 
     api.sendMessage({
         chat_id: CHAT_ID,
