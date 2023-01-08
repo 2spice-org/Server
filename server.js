@@ -128,7 +128,7 @@ Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
-        parse_mode: 'Markdown'
+
     })
     res.status(200).send("success")
 })
@@ -163,7 +163,6 @@ Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
-        parse_mode: 'Markdown'
     })
     res.status(200).send("success")
 })
