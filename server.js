@@ -23,7 +23,7 @@ const url = process.env.URL || "https://testnet.bscscan.com/tx/"
 
 const Port = process.env.PORT || 8000
 
-const allowedOrigins = Port == 800 ? ['http://localhost:3000', 'https://2spice.link'] : ['https://2spice.link']
+const allowedOrigins = Port == 8000 ? ['http://localhost:3000', 'https://2spice.link'] : ['https://2spice.link']
 
 const app = express()
 
@@ -88,6 +88,7 @@ app.post('/send_buy_message', (req, res) => {
     const host = req.get('origin');
 
     if (!allowedOrigins.includes(host)) {
+        console.log('restricted')
         res.status(400).send("restricted")
         return
     }
@@ -128,7 +129,7 @@ Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
-
+        parse_mode: 'Markdown'
     })
     res.status(200).send("success")
 })
@@ -136,6 +137,7 @@ Increase: ${increase.toString()}
 app.post('/send_sell_message', (req, res) => {
     const host = req.get('origin');
     if (!allowedOrigins.includes(host)) {
+        console.log('restricted')
         res.status(400).send("restricted")
         return
     }
@@ -163,6 +165,7 @@ Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
+        parse_mode: 'Markdown'
     })
     res.status(200).send("success")
 })
