@@ -104,7 +104,7 @@ app.post('/send_buy_message', (req, res) => {
     const currentPrice = data.currentPrice
     const Increase = data.increase
 
-    const increase = (Math.round(currentPrice - startPrice) * 10000000) / 1000000
+    const increase = currentPrice - 1
 
     console.log(
         `
@@ -114,7 +114,7 @@ app.post('/send_buy_message', (req, res) => {
         TX LINK: [BSC](${url}${tx_link})
         Start Price: ${startPrice}
         Current price: ${currentPrice}
-        Increase: ${Math.round(currentPrice - startPrice).toString()}
+        Increase: ${increase.toString()}
         `
     )
 
@@ -126,7 +126,7 @@ app.post('/send_buy_message', (req, res) => {
 Reciepient: ${receipient.toString()} 
 SPICE MINTED: ${amount.toString()}
 TX LINK: [BSC](${url}${tx_link})
-Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
+Start Price: ${1}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
@@ -152,7 +152,7 @@ app.post('/send_sell_message', (req, res) => {
     const startPrice = data.startPrice
     const currentPrice = data.currentPrice
     const Increase = data.increase
-    const increase = (Math.round(currentPrice - startPrice) * 10000000) / 10000000
+    const increase = currentPrice - 1
 
     api.sendMessage({
         chat_id: CHAT_ID,
@@ -162,7 +162,7 @@ app.post('/send_sell_message', (req, res) => {
 Seller: ${receipient}
 SPICE Redeemed: ${amount.toString()} 
 TX LINK: [BSC](${url}${tx_link})
-Start Price: ${(Math.round(startPrice * 100) / 100).toString()}
+Start Price: ${1}
 Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
 Increase: ${increase.toString()}
         `,
