@@ -127,7 +127,7 @@ Reciepient: ${receipient.toString()}
 SPICE MINTED: ${amount.toString()}
 TX LINK: [BSC](${url}${tx_link})
 Start Price: ${1}
-Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
+Current price: ${(Math.round(currentPrice * 10000) / 10000).toString()}
 Increase: ${increase.toString()}
         `,
         parse_mode: 'Markdown'
@@ -163,7 +163,7 @@ Seller: ${receipient}
 SPICE Redeemed: ${amount.toString()} 
 TX LINK: [BSC](${url}${tx_link})
 Start Price: ${1}
-Current price: ${(Math.round(currentPrice * 100) / 100).toString()}
+Current price: ${(Math.round(currentPrice * 10000) / 10000).toString()}
 Increase: ${increase.toString()}
         `,
         parse_mode: 'Markdown'
